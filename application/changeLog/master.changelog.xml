@@ -8,21 +8,14 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-    <changeSet id="1" author="bob">
-        <createTable tableName="department">
-            <column name="id" type="int">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="active" type="boolean" defaultValueBoolean="true"/>
-        </createTable>
     </changeSet>
-
-    <changeSet id="1" author="kamil">
-
-		<ora:truncate tableName="department" purgeMaterializedViewLog="true" reuseStorage="true"/>
-		<ora:tr
-	</changeSet>
+		<changeSet author="kamil wysocki" id="tabela z modelem">
+        <ora:createModelTable tableName="nowa" schemaName="hr">
+			<column name="active" type="varchar2(20)" remarks="jakis koment"/>
+			<column name="active3" type="varchar2(20)" remarks="jakis koment"/>
+		</ora:createModelTable>
+		<rollback>
+			drop table nowa
+		</rollback>
+    </changeSet>
 </databaseChangeLog>
